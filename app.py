@@ -12,7 +12,7 @@ def send_notification(message):
         'user': 'uga9w2s6wJsnGUwTjpmJnyMQnV6E5q',
         'priority': -1,
         'message': message,
-        'title': message
+        'title': 'Productivity'
     }
     requests.post(pushover_url, params=params)
 
