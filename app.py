@@ -25,7 +25,7 @@ def get_pulse_change():
     json_response = resp.json()
     latest, previous, *_ = json_response
     change = latest['productivity_pulse'] - previous['productivity_pulse']
-    return "{}%".format(abs(change))
+    return "{}%".format(change)
 
 @app.route('/')
 def index():
