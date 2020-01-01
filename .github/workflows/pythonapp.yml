@@ -1,0 +1,28 @@
+name: nosedive
+
+on:
+  schedule:
+    - cron: '15 0 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run nosedive
+      env:
+        PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+        PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+        RESCUETIME_TOKEN: ${{ secrets.RESCUETIME_TOKEN }}
+      run: |
+        python nosedive.py
