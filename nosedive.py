@@ -9,7 +9,7 @@ def send_notification(message):
         'user': os.getenv('PUSHOVER_USER_KEY'),
         'priority': -1,
         'message': message,
-        'title': message
+        'title': 'Productivity'
     }
     requests.post(pushover_url, params=params)
 
@@ -22,7 +22,7 @@ def get_pulse_change():
     json_response = resp.json()
     latest, previous, *_ = json_response
     change = latest['productivity_pulse'] - previous['productivity_pulse']
-    return "{}%".format(abs(change))
+    return "{:+}%".format(change)
 
 if __name__ == '__main__':
     change = get_pulse_change()
